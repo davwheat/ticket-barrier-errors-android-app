@@ -12,7 +12,7 @@ From one number we can provide...
 
 ## Screenshots
 
-![](docs/img/example_nothing-entered.png)
-![](docs/img/example_error-1.png)
-![](docs/img/example_error-7.png)
-![](docs/img/example_error-76.png)
+![](docs/img/example_nothing-entered.small.png)
+![](docs/img/example_error-1.small.png)
+![](docs/img/example_error-7.small.png)
+![](docs/img/example_error-76.small.png)
