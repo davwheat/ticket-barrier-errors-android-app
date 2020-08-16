@@ -11,8 +11,8 @@ final List<Rejection> allRejectCodes = [
   Rejection(
     "01",
     textCode: "BAD TABLE",
-    definition: "Invalid table data",
-    helpText: "This barrier has a faulty database.",
+    definition: "Gateline error: invalid table data",
+    helpText: "This gateline has a faulty database.",
     action: Action.CONTACT_CTS,
   ),
   Rejection(
@@ -28,15 +28,14 @@ final List<Rejection> allRejectCodes = [
     textCode: "TYPE OOR",
     definition: "Ticket type out of table's range",
     helpText:
-        "Your ticket type isn't in the barrier's database of valid ticket types",
+        "Your ticket type isn't in the barrier's database of valid ticket types. E.g. using a National Rail ticket in a TfL or London Underground barrier when it's not allowed.",
     action: Action.SEEK_ASSISTANCE,
   ),
   Rejection(
     "04",
     textCode: "CHK ERROR",
-    definition: "Ticket type out of table's range",
-    helpText:
-        "Your ticket is invalid for entre/exit through this gateline. Are you entering the wrong platform?",
+    definition: "Gateline error: check table error",
+    helpText: "This gateline has a fault.",
     action: Action.CONTACT_CTS,
   ),
   Rejection(
@@ -81,6 +80,12 @@ final List<Rejection> allRejectCodes = [
     action: Action.REPLACE_TICKET,
   ),
   Rejection(
+    "10",
+    textCode: "Unknown",
+    definition: "Carnet validated",
+    helpText: "Your carnet ticket was successfully validated.",
+  ),
+  Rejection(
     "11",
     textCode: "DATE EXP",
     definition: "Ticket/card expired",
@@ -93,7 +98,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "TIME O DAY",
     definition: "Ticket not yet valid",
     helpText:
-        "Ticket isn't valid yet. Check the date of travel on your ticket.",
+        "Ticket isn't valid at this time of day. E.g. trying to use a freedom pass before 9 AM.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -140,7 +145,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "INVAL STN",
     definition: "Ticket not valid at this station",
     helpText:
-        "You're trying to use a platform ticket issued at another station.",
+        "You're trying to use a station permit which was issued at another station.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -175,7 +180,7 @@ final List<Rejection> allRejectCodes = [
   Rejection(
     "23",
     textCode: "CARNET NVL",
-    definition: "Double exit attempted",
+    definition: "Carnet ticket not validated",
     helpText:
         "Your carnet ticket wasn't put though a ticket machine at the start of your journey, meaning it wasn't validated.",
   ),
@@ -184,7 +189,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "LOW SV-NZ1",
     definition: "Insufficient PAYG credit",
     helpText:
-        "Your Oyster or Smartcard has a negative or insufficient balance. Please top up before beginning your journey.",
+        "You have a valid season ticket, but you've travelled beyond its validity and don't have enough PAYG balance to pay for this journey. Please top up before beginning your journey.",
     action: Action.TOP_UP_CARD,
   ),
   Rejection(
@@ -207,14 +212,13 @@ final List<Rejection> allRejectCodes = [
     "27",
     textCode: "TNP DIS ZN",
     definition: "PAYG disabled in this zone",
-    helpText:
-        "PAYG on your Oyster or Smartcard is disabled for this travel zone.",
+    helpText: "PAYG on your Oyster or Smartcard is not enabled.",
   ),
   Rejection(
     "28",
     textCode: "SV DISBLD",
-    definition: "PAYG capability disabled",
-    helpText: "PAYG on your Oyster or Smartcard isn't enabled.",
+    definition: "PAYG capability disabled.",
+    helpText: "PAYG on your Oyster or Smartcard is not enabled.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -273,7 +277,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "LOW SV",
     definition: "Insufficient PAYG credit",
     helpText:
-        "Your Oyster or Smartcard has a negative or insufficient balance. Please top up before beginning your journey.",
+        "Your Oyster or Smartcard has a negative or insufficient balance and you have no valid season ticket. Please top up before beginning your journey.",
     action: Action.TOP_UP_CARD,
   ),
   Rejection(
@@ -366,7 +370,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "BLACK PASS",
     definition: "Blacklisted staff pass",
     helpText:
-        "This is a lost staff pass. Return it to a ticket office immediately.",
+        "This is a lost/stolen staff pass. Return it to a ticket office immediately.",
     action: Action.IRREG_TRAVEL,
   ),
   Rejection(
@@ -374,7 +378,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "BLACK PERM",
     definition: "Blacklisted travel permit",
     helpText:
-        "This is a lost travel permit. Return it to a ticket office immediately.",
+        "This is a lost/stolen travel permit. Return it to a ticket office immediately.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -397,7 +401,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "OUTOFTERM",
     definition: "Scholar Pass out of term",
     helpText:
-        "Your student pass cannot be used outside of school times. Please buy a valid ticket.",
+        "Your student pass cannot be used outside of school term dates. Please buy a valid ticket.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -480,7 +484,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "PRSNTN ERR",
     definition: "Unspecified Oyster/Smartcard",
     helpText: "Card not processed correctly.",
-    action: Action.CHECK_CARD,
+    action: Action.TRY_AGAIN_ONE_CARD,
   ),
   Rejection(
     "71",
@@ -803,10 +807,26 @@ final List<Rejection> allRejectCodes = [
   ),
   Rejection(
     "117",
-    textCode: "XX OOOO",
-    definition:
-        "Station not listed for entry/exit with this National Rail ticket",
-    helpText: "Your ticket cannot be used for travel to/from this station.",
+    textCode: "XX DDMMYY",
+    definition: "National Rail ticket ceased to be valid after date shown",
+    helpText:
+        "Your ticket cannot be used for travel anymore. Please buy a new ticket.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "118",
+    textCode: "XX DDMMYY",
+    definition: "National Rail ticket is not valid until date shown",
+    helpText:
+        "Your ticket cannot be used for travel yet. Please buy another ticket.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "119",
+    textCode: "XX DDMMYY",
+    definition: "National Rail pass is not valid until date shown",
+    helpText:
+        "Your ticket cannot be used for travel yet. Please buy another ticket.",
     action: Action.TO_TICKET_OFFICE,
   ),
 ];
