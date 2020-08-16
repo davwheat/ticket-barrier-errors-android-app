@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../widgets/codeInfo.dart';
+import '../widgets/glossary.dart';
 
 class EnterGatelineCodePage extends StatefulWidget {
   EnterGatelineCodePage({Key key}) : super(key: key);
@@ -92,6 +93,7 @@ class _EnterGatelineCodePageState extends State<EnterGatelineCodePage> {
                   ),
                 ),
                 codeInfo,
+                c >= 100 ? NRKeyGlossary() : SizedBox.shrink(),
               ],
             ),
           ),
