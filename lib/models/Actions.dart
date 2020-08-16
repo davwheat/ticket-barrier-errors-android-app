@@ -23,7 +23,7 @@ String actionToString(Action action) {
   if (action == Action.TO_TICKET_OFFICE)
     return "Refer to ticket office or seek assistance";
   else if (action == Action.IRREG_TRAVEL)
-    return "Suspicious or irregular travel - seek assistance";
+    return "Suspicious or irregular travel - seek assistance from staff";
   else if (action == Action.TOP_UP_CARD)
     return "Top up Oyster or Smartcard PAYG balance";
   else if (action == Action.HELPDESK)
@@ -39,7 +39,7 @@ String actionToString(Action action) {
   else if (action == Action.TRY_AGAIN_CARD)
     return "Represent card";
   else if (action == Action.TRY_AGAIN_ONE_CARD)
-    return "Present only one card";
+    return "Represent only one card";
   else if (action == Action.CHECK_RCI)
     return "Check RCI list - seek assistance";
   else if (action == Action.CONTACT_CTS)
