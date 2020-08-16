@@ -7,7 +7,6 @@ final List<Rejection> allRejectCodes = [
     textCode: "",
     definition: "Valid ticket/smartcard",
     helpText: "Your ticket is valid for entry/exit through this gateline.",
-    action: Action.NONE,
   ),
   Rejection(
     "01",
@@ -46,7 +45,7 @@ final List<Rejection> allRejectCodes = [
     definition:
         "Undergound: customer ticket inserted while gate in test mode.\n\nOther: Test mode ticket inserted.",
     helpText:
-        "The gateline is set to testing mode which refuses real transport tickets. Seek assistance.",
+        "The gateline is set to testing mode which refuses real transport tickets.",
     action: Action.DISABLE_TEST_MODE,
   ),
   Rejection(
@@ -70,7 +69,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "VRF FAIL",
     definition: "Ticket re-coding error",
     helpText:
-        "Something went wrong when updating info on your ticket. Try again or seek assistance.",
+        "Something went wrong when updating info on your ticket. Try again or seek assistance for a ticket replacement.",
     action: Action.REPLACE_TICKET,
   ),
   Rejection(
@@ -193,14 +192,15 @@ final List<Rejection> allRejectCodes = [
     textCode: "NOT ENTERD",
     definition: "Unstarted journey",
     helpText:
-        "You didn't touch in at the start of your journey or the touch in failed. Seek assistance.",
+        "You didn't touch in at the start of your journey or the touch in failed.",
+    action: Action.SEEK_ASSISTANCE,
   ),
   Rejection(
     "26",
     textCode: "SM ENT EXT",
     definition: "Entry and exit at same station",
     helpText:
-        "You touched in and touched out at the same station. Did you decide not to travel? Seek assistance.",
+        "You touched in and touched out at the same station. Did you decide not to travel?",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -258,6 +258,7 @@ final List<Rejection> allRejectCodes = [
     textCode: "EXT DISALL",
     definition: "Exit not allowed - PAYG not validated on journey.",
     helpText: "Seek assistance.",
+    action: Action.SEEK_ASSISTANCE,
   ),
   Rejection(
     "35",
@@ -710,6 +711,102 @@ final List<Rejection> allRejectCodes = [
     definition: "Ticket had invalid data",
     helpText:
         "Your ticket has invalid data. Ask a ticket office for a replacement",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "105",
+    textCode: "XX INV",
+    definition: "Invalid rail ticket type",
+    helpText: "Your ticket type is invalid.",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "106",
+    textCode: "XX REJECT",
+    definition: "Always to be rejected",
+    helpText:
+        "Something about your ticket is set to always be rejected by the barriers.",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "107",
+    textCode: "XX TTTT",
+    definition: "Time restraint applied to this ticket type",
+    helpText:
+        "You're attempting to pass through the barriers with a time limited ticket.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "108",
+    textCode: "PP TTTT",
+    definition: "Time restraint applied to this passenger type",
+    helpText:
+        "You're attempting to pass through the barriers with a time limited ticket.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "109",
+    textCode: "XX TTTT",
+    definition:
+        "Time restraint specified by London Underground data on your National Rail ticket",
+    helpText:
+        "You're attempting to pass through the barriers with a time limited ticket.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "111",
+    textCode: "XX ZONES",
+    definition: "National Rail ticket not valid in this zone",
+    helpText:
+        "Your ticket is not valid in your current zone. Buy a new ticket at the ticket office.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "112",
+    textCode: "XX DDMMYY",
+    definition: "Single/return ticket not valid until date shown",
+    helpText:
+        "Your ticket is not valid yet. Buy a new ticket at the ticket office.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "113",
+    textCode: "XX DDMMYY",
+    definition: "Single/return ticket not valid after date shown",
+    helpText:
+        "Your season/rover ticket has expired. Check the date on your ticket and/or buy a new one at a ticket office.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "114",
+    textCode: "XX DDMMYY",
+    definition: "Season/rover ticket not valid until date shown",
+    helpText:
+        "Your season/rover ticket is not valid yet. Check the date on your ticket and/or buy a new one at a ticket office.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "115",
+    textCode: "XX DDMMYY",
+    definition: "Season/rover ticket not valid after date shown",
+    helpText:
+        "Your season/rover ticket has expired. Check the date on your ticket and/or buy a new one at a ticket office.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "116",
+    textCode: "XX OOOO",
+    definition:
+        "Station not listed for entry/exit with this National Rail ticket",
+    helpText: "Your ticket cannot be used for travel to/from this station.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "117",
+    textCode: "XX OOOO",
+    definition:
+        "Station not listed for entry/exit with this National Rail ticket",
+    helpText: "Your ticket cannot be used for travel to/from this station.",
     action: Action.TO_TICKET_OFFICE,
   ),
 ];
