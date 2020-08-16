@@ -43,7 +43,7 @@ String actionToString(Action action) {
   else if (action == Action.CHECK_RCI)
     return "Check RCI list - seek assistance";
   else if (action == Action.CONTACT_CTS)
-    return "Contact the Cubic Transportation Systems Report Centre";
+    return "Seek assistance - Staff: contact the Cubic Transportation Systems Report Centre";
   else if (action == Action.DISABLE_TEST_MODE)
     return "Disable test mode - seek assistance";
   else if (action == Action.REPLACE_TICKET)
