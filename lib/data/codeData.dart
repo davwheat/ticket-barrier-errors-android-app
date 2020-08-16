@@ -825,8 +825,7 @@ final List<Rejection> allRejectCodes = [
     "119",
     textCode: "XX DDMMYY",
     definition: "National Rail pass is not valid until date shown",
-    helpText:
-        "Your ticket cannot be used for travel yet. Please buy another ticket.",
+    helpText: "Your pass cannot be used for travel yet.",
     action: Action.TO_TICKET_OFFICE,
   ),
 ];
