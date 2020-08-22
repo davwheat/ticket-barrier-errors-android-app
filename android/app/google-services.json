@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "310299056014",
+    "firebase_url": "https://railway-gateline-errors.firebaseio.com",
+    "project_id": "railway-gateline-errors",
+    "storage_bucket": "railway-gateline-errors.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310299056014:android:b1af38a350efd5cd70b6df",
+        "android_client_info": {
+          "package_name": "dev.davwheat.railway.gateline_errors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310299056014-7oij49k9mon7sjgvihfnif42d2mnmg91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.davwheat.railway.gateline_errors",
+            "certificate_hash": "f56b8d1bea9c43cb01d04a4732c61b041218d911"
+          }
+        },
+        {
+          "client_id": "310299056014-lc84rd8mj4ne2viknnd3o51epqu19d3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCec7uxnvuPZCBryHXM5AGNIAcdq2jHprM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310299056014-lc84rd8mj4ne2viknnd3o51epqu19d3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
