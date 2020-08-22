@@ -828,4 +828,141 @@ final List<Rejection> allRejectCodes = [
     helpText: "Your pass cannot be used for travel yet.",
     action: Action.TO_TICKET_OFFICE,
   ),
+  Rejection(
+    "120",
+    textCode: "XX DDMMYY",
+    definition: "National Rail pass expired on date shown",
+    helpText: "Your pass cannot be used for travel anymore: it has expired.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "121",
+    textCode: "XX PZ",
+    definition: "National Rail pass is not valid here",
+    helpText: "Your pass cannot be used at this station or zone.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "122",
+    textCode: "XX YY",
+    definition: "London Underground ticket not valid here",
+    helpText:
+        "Your London Underground ticket cannot be used to travel on National Rail services.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "123",
+    textCode: "XX ROUTE",
+    definition: "National Rail ticket prohibits travel via this station",
+    helpText:
+        "Travel via this station isn't allowed with your ticket. Check your ticket for a URL to see the restrictions for travel.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "124",
+    textCode: "PP PASNGR",
+    definition: "National Rail",
+    helpText:
+        "Your London Underground ticket cannot be used to travel on National Rail services.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "125",
+    textCode: "XX DDDD",
+    definition: "National Rail ticket cannot be used to exit here",
+    helpText:
+        "The destination on your ticket doesn't match your current station.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "126",
+    textCode: "XX OOOO",
+    definition: "National Rail ticket cannot be used to enter here",
+    helpText: "The origin on your ticket doesn't match your current station.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "127",
+    textCode: "XX DDMMYY",
+    definition: "National Rail ticket not valid today",
+    helpText: "The date on your ticket doesn't match today's date.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "128",
+    textCode: "XX LLLL",
+    definition: "Ticket valid at London Underground stations only",
+    helpText: "Your ticket can only be used at London Underground stations.",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "129",
+    textCode: "XX",
+    definition: "National Rail ticket wrong direction",
+    helpText:
+        "Your ticket isn't valid for travel in this direction. Are you using the wrong set of barriers?",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "130",
+    textCode: "XX SSSS",
+    definition: "Ticket valid at London Underground stations only",
+    helpText:
+        "Your ticket can only be used at London Underground stations. (Meaning of SSSS is unknown.)",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "131",
+    textCode: "XX FFFF",
+    definition: "National Rail ticket has insufficient fare",
+    helpText:
+        "Meaning unknown. Maybe travelled too far, with an off-peak ticket during peak, or a fake ticket?",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "132",
+    textCode: "XX",
+    definition: "London Underground route",
+    helpText: "Meaning unknown.",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "133",
+    textCode: "XX TTTT",
+    definition: "Ticket pass-back prevention",
+    helpText:
+        "This ticket was just used in this direction. Are you being naughty?",
+    action: Action.IRREG_TRAVEL,
+  ),
+  Rejection(
+    "134",
+    textCode: "XX DDMMYY",
+    definition: "Expired ticket",
+    helpText: "Your ticket has expired.",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "135",
+    textCode: "XX RR",
+    definition: "National Rail ticket/smartcard special rules",
+    helpText: "Meaning unknown. Maybe rejecting ceratin ticket types?",
+    action: Action.SEEK_ASSISTANCE,
+  ),
+  Rejection(
+    "136",
+    textCode: "XX TTTT",
+    definition: "National Rail ticket direction of travel time restriction",
+    helpText:
+        "You can't travel with this ticket type in this direction at this time. Are you trying to use a railcard discounted ticket during peak?",
+    action: Action.TO_TICKET_OFFICE,
+  ),
+  Rejection(
+    "137",
+    textCode: "XX TTTT",
+    definition:
+        "National Rail passenger type direction of travel time restriction",
+    helpText:
+        "You can't travel with this ticket type in this direction at this time. Are you trying to use a railcard discounted ticket during peak?",
+    action: Action.TO_TICKET_OFFICE,
+  ),
 ];
