@@ -149,6 +149,31 @@ class GatelineCodeInfo extends StatelessWidget {
                   ],
                 ),
               ),
+              (gatelineRejection.laymansReason != null
+                  ? Padding(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Possible reason(s)",
+                                  style: InfoTitleTextTheme,
+                                ),
+                                Text(
+                                  gatelineRejection.laymansReason,
+                                  style: InfoDataTextTheme,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox.shrink()),
               Padding(
                 padding: EdgeInsets.only(top: 12),
                 child: Row(
@@ -171,7 +196,7 @@ class GatelineCodeInfo extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
