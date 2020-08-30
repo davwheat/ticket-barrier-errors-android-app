@@ -113,7 +113,7 @@ class _EnterGatelineCodePageState extends State<EnterGatelineCodePage> {
                 ),
               ),
               codeInfo,
-              c >= 100 ? NRKeyGlossary() : SizedBox.shrink(),
+              c >= 100 && c < 200 ? NRKeyGlossary() : SizedBox.shrink(),
             ],
           ),
         ),
