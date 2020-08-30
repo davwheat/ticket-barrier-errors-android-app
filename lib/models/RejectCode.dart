@@ -11,6 +11,8 @@ class Rejection {
   Action _actionByStaff;
   String _actionText;
 
+  String _laymansReason;
+
   String get code => _code;
   int get codeInteger => _codeInteger;
   String get textCode => _textCode;
@@ -18,6 +20,7 @@ class Rejection {
   String get helpText => _helpText;
   String get actionByStaff => actionToString(_actionByStaff);
   String get actionText => _actionText;
+  String get laymansReason => _laymansReason;
 
   Rejection(
     this._code, {
@@ -25,6 +28,7 @@ class Rejection {
     String definition = "",
     String helpText = "",
     Action action = Action.NONE,
+    String laymansReason,
   }) {
     this._codeInteger = int.tryParse(_code);
     assert(this.codeInteger != null);
@@ -33,5 +37,6 @@ class Rejection {
     this._definition = definition;
     this._helpText = helpText;
     this._actionByStaff = action;
+    this._laymansReason = laymansReason;
   }
 }
