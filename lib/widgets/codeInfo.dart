@@ -118,7 +118,7 @@ class GatelineCodeInfo extends StatelessWidget {
                         ),
                         Text(
                           gatelineRejection.definition ?? "Unknown",
-                          style: InfoDataTextTheme,
+                          style: InfoDataImportantTextTheme,
                         ),
                       ],
                     ),
