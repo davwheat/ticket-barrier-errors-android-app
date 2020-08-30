@@ -4,14 +4,17 @@ import '../models/RejectCode.dart';
 final List<Rejection> allRejectCodes = [
   Rejection(
     "00",
-    textCode: "",
+    textCode: "Unknown",
     definition: "Valid ticket/smartcard",
+    laymansReason: "You've got a perfectly valid ticket. Woohoo.",
     helpText: "Your ticket is valid for entry/exit through this gateline.",
   ),
   Rejection(
     "01",
     textCode: "BAD TABLE",
     definition: "Gateline error: invalid table data",
+    laymansReason:
+        "It's not you, it's them. The ticket barrier you're using is faulty.",
     helpText: "This gateline has a faulty database.",
     action: Action.CONTACT_CTS,
   ),
@@ -19,22 +22,28 @@ final List<Rejection> allRejectCodes = [
     "02",
     textCode: "TYPE/DIR",
     definition: "Wrong ticket type or direction",
+    laymansReason:
+        "Are you using a platform ticket? These can often only be used once, on one platform or set of platforms only.",
     helpText:
-        "Your ticket is invalid for entre/exit through this gateline. Are you entering the wrong platform?",
+        "Your ticket is invalid for entry/exit through this gateline. Are you entering the wrong platform?",
     action: Action.IRREG_TRAVEL,
   ),
   Rejection(
     "03",
     textCode: "TYPE OOR",
     definition: "Ticket type out of table's range",
+    laymansReason:
+        "It's not you, it's them. The ticket barrier you're using doesn't understand your ticket type. This is fairly common, especially if you're using uncommon tickets such as 'super off-peak' or rovers.",
     helpText:
-        "Your ticket type isn't in the barrier's database of valid ticket types. E.g. using a National Rail ticket in a TfL or London Underground barrier when it's not allowed.",
+        "Your ticket type isn't in the barrier's database of valid ticket types.",
     action: Action.SEEK_ASSISTANCE,
   ),
   Rejection(
     "04",
     textCode: "CHK ERROR",
     definition: "Gateline error: check table error",
+    laymansReason:
+        "It's not you, it's them. This ticket barrier has a faulty database.",
     helpText: "This gateline has a fault.",
     action: Action.CONTACT_CTS,
   ),
@@ -167,6 +176,8 @@ final List<Rejection> allRejectCodes = [
     "21",
     textCode: "DOUBLE ENT",
     definition: "Double entry attempted",
+    laymansReason:
+        "Your smartcard has already been used to enter this station recently. Have you tapped in more than once?",
     helpText: "Your Oyster or Smartcard has already touched in.",
     action: Action.IRREG_TRAVEL,
   ),
@@ -174,6 +185,8 @@ final List<Rejection> allRejectCodes = [
     "22",
     textCode: "DOUBLE EXI",
     definition: "Double exit attempted",
+    laymansReason:
+        "Your smartcard has already been used to exit at this station recently. Have you tapped out more than once?",
     helpText: "Your Oyster or Smartcard has already touched out.",
     action: Action.IRREG_TRAVEL,
   ),
@@ -204,8 +217,9 @@ final List<Rejection> allRejectCodes = [
     "26",
     textCode: "SM ENT EXT",
     definition: "Entry and exit at same station",
-    helpText:
-        "You touched in and touched out at the same station. Did you decide not to travel?",
+    laymansReason:
+        "You've tapped in and out at the same station within a short amount of time. Did you decide not to travel?",
+    helpText: "You touched in and touched out at the same station.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -232,6 +246,8 @@ final List<Rejection> allRejectCodes = [
     "30",
     textCode: "CARD DIS",
     definition: "Oyster or Smartcard disabled",
+    laymansReason:
+        "Have you reported your smartcard lost/stolen and found it again? You'll need to get a replacement as the other smartcard will have been deactivated.",
     helpText:
         "This Oyster or Smartcard has been disabled as it's been reported lost, stolen, it was misused, the payment card is due to expire, or an auto topup has failed.",
     action: Action.IRREG_TRAVEL,
@@ -276,6 +292,8 @@ final List<Rejection> allRejectCodes = [
     "36",
     textCode: "LOW SV",
     definition: "Insufficient PAYG credit",
+    laymansReason:
+        "Not expecting to see a low balance? Check your journey history at a ticket machine. You might have been charged for an incomplete journey if you've forgotten to tap in or out.",
     helpText:
         "Your Oyster or Smartcard has a negative or insufficient balance and you have no valid season ticket. Please top up before beginning your journey.",
     action: Action.TOP_UP_CARD,
@@ -284,6 +302,8 @@ final List<Rejection> allRejectCodes = [
     "41",
     textCode: "PASSB THRU",
     definition: "Pass back through",
+    laymansReason:
+        "If you touch in and out a few times at a station within a short amount of time, the barriers won't let you through as they think you might be handing the ticket back to other people.",
     helpText:
         "Attempt to touch in after a touch in and and touch out at the same station, or attempt to touch out after a touch out and touch in at the same station.",
   ),
@@ -291,6 +311,8 @@ final List<Rejection> allRejectCodes = [
     "42",
     textCode: "PASSB OVER",
     definition: "Pass back",
+    laymansReason:
+        "If you touch in and out a few times at a station within a short amount of time, the barriers won't let you through as they think you might be handing the ticket back to other people.",
     helpText:
         "Oyster or Smartcard just used in the same direction at the same station.",
   ),
@@ -298,6 +320,8 @@ final List<Rejection> allRejectCodes = [
     "43",
     textCode: "INVAL PSNG",
     definition: "Invalid passenger count",
+    laymansReason:
+        "For some reason, your smartcard has become corrupted, meaning you'll need a replacement smartcard. Contact the company you got it from to get a new one.",
     helpText:
         "Smartcard total passenger count is not equal to 1. Possible corrupted smartcard.",
     action: Action.REPLACE_ITSO_CARD,
@@ -307,8 +331,9 @@ final List<Rejection> allRejectCodes = [
     textCode: "NO RIDES",
     definition:
         "ITSO: There are no rides remaining on an IPE where that IPE is the only valid IPE on the card",
-    helpText:
-        "No valid Smartcard ticket. Check your loaded tickets via the On Track app.",
+    laymansReason:
+        "There's no valid ticket on your smartcard. Any loaded tickets are either no longer valid",
+    helpText: "No valid Smartcard ticket. Check your loaded tickets.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -707,6 +732,8 @@ final List<Rejection> allRejectCodes = [
     textCode: "TRAINING",
     definition: "Ticket issued in training mode",
     helpText: "Your ticket isn't valid for travel.",
+    laymansReason:
+        "This ticket was printed by a ticket office, but the machine was in training mode, which is usually used to teach new staff members how to use the system.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -722,6 +749,8 @@ final List<Rejection> allRejectCodes = [
     textCode: "XX INV",
     definition: "Invalid rail ticket type",
     helpText: "Your ticket type is invalid.",
+    laymansReason:
+        "It's not you, it's them. The ticket barrier you're using doesn't understand your ticket type. This is fairly common, especially if you're using uncommon tickets such as 'super off-peak' or rovers.",
     action: Action.SEEK_ASSISTANCE,
   ),
   Rejection(
@@ -755,6 +784,9 @@ final List<Rejection> allRejectCodes = [
         "Time restraint specified by London Underground data on your National Rail ticket",
     helpText:
         "You're attempting to pass through the barriers with a time limited ticket.",
+    laymansReason:
+        "Some tickets are restricted to certain times of day, such as off-peak. " +
+            "Ask at a ticket office for the time restrictions on your ticket.",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
@@ -763,6 +795,9 @@ final List<Rejection> allRejectCodes = [
     definition: "National Rail ticket not valid in this zone",
     helpText:
         "Your ticket is not valid in your current zone. Buy a new ticket at the ticket office.",
+    laymansReason:
+        "Some London tickets are limited to specific zones (e.g. 1-3, 1-6, or 1-9). " +
+            "Are you trying to pass through the barriers outside one of these zones?",
     action: Action.TO_TICKET_OFFICE,
   ),
   Rejection(
