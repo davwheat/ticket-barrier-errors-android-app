@@ -36,7 +36,7 @@ class GatelineCodeInfo extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
           width: double.infinity,
           child: Text(
-            "Enter any gateline error code in the box above.",
+            "Enter a ticket barrier error code above",
             textAlign: TextAlign.center,
           ),
         ),
