@@ -18,7 +18,7 @@ fun getBuildNumber(): Int {
   val df = SimpleDateFormat("yyyyMMdd")
   val date = LocalDateTime.now()
   val seconds =
-      (Duration.between(date.withSecond(0).withMinute(0).withHour(0), date).seconds / 86400) * 99.0
+    (Duration.between(date.withSecond(0).withMinute(0).withHour(0), date).seconds / 86400) * 99.0
   val twoDigitSuffix = seconds.toInt()
 
   return Integer.parseInt(df.format(Date()) + String.format("%02d", twoDigitSuffix))

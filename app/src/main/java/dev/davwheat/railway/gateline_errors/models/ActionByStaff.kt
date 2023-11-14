@@ -38,7 +38,8 @@ enum class ActionByStaff {
       TRY_AGAIN_ONE_CARD -> "Represent only one card"
       CHECK_RCI -> "Check RCI list - seek assistance"
       CONTACT_CTS ->
-          "Seek assistance - Staff: contact the Cubic Transportation Systems Report Centre"
+        "Seek assistance - Staff: contact the Cubic Transportation Systems Report Centre"
+
       DISABLE_TEST_MODE -> "Disable test mode - seek assistance"
       REPLACE_TICKET -> "Replace ticket - seek assistance"
       REPLACE_ITSO_CARD -> "You need a replacement smartcard - seek assistance"

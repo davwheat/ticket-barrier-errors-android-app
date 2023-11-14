@@ -23,48 +23,48 @@ import dev.davwheat.railway.gateline_errors.ui.theme.LcdDisplayFont
 
 @Composable
 fun ErrorCodeDetail(
-    modifier: Modifier = Modifier,
-    errorCode: Rejection,
+  modifier: Modifier = Modifier,
+  errorCode: Rejection,
 ) {
   Column(
-      modifier,
-      verticalArrangement = Arrangement.spacedBy(8.dp),
+    modifier,
+    verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
     Text(
-        stringResource(R.string.seek_assistance, errorCode.code),
-        modifier = Modifier.fillMaxWidth(),
-        fontFamily = LcdDisplayFont,
-        fontSize = 24.sp,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        textAlign = TextAlign.Center,
+      stringResource(R.string.seek_assistance, errorCode.code),
+      modifier = Modifier.fillMaxWidth(),
+      fontFamily = LcdDisplayFont,
+      fontSize = 28.sp,
+      color = MaterialTheme.colorScheme.onSurfaceVariant,
+      textAlign = TextAlign.Center,
     )
 
     errorCode.textCode?.let { code ->
       DataPair(
-          heading = "Text Error",
-          text = { _modifier, style, align ->
-            Text(
-                modifier = _modifier,
-                text = code,
-                style = style,
-                fontFamily = LcdDisplayFont,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = 18.sp,
-                textAlign = align,
-            )
-          },
-          modifier = Modifier.align(Alignment.CenterHorizontally),
-          align = TextAlign.Center,
+        heading = "Text Error",
+        text = { _modifier, style, align ->
+          Text(
+            modifier = _modifier,
+            text = code,
+            style = style,
+            fontFamily = LcdDisplayFont,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            fontSize = 18.sp,
+            textAlign = align,
+          )
+        },
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        align = TextAlign.Center,
       )
     }
 
     DataPair(heading = "Definition") { _modifier, style, align ->
       Text(
-          modifier = _modifier,
-          text = errorCode.definition,
-          style = style,
-          textAlign = align,
-          fontWeight = FontWeight.Bold,
+        modifier = _modifier,
+        text = errorCode.definition,
+        style = style,
+        textAlign = align,
+        fontWeight = FontWeight.Bold,
       )
     }
 
@@ -78,34 +78,34 @@ fun ErrorCodeDetail(
 
 @Composable
 private fun DataPair(
-    modifier: Modifier = Modifier,
-    align: TextAlign = TextAlign.Start,
-    heading: String,
-    text: String,
+  modifier: Modifier = Modifier,
+  align: TextAlign = TextAlign.Start,
+  heading: String,
+  text: String,
 ) {
   DataPair(
-      modifier = modifier,
-      heading = heading,
-      text = { _modifier, style, _ ->
-        Text(modifier = _modifier, text = text, style = style, textAlign = align)
-      },
-      align = align,
+    modifier = modifier,
+    heading = heading,
+    text = { _modifier, style, _ ->
+      Text(modifier = _modifier, text = text, style = style, textAlign = align)
+    },
+    align = align,
   )
 }
 
 @Composable
 private fun DataPair(
-    modifier: Modifier = Modifier,
-    align: TextAlign = TextAlign.Start,
-    heading: String,
-    text: @Composable (modifier: Modifier, defaultStyle: TextStyle, textAlign: TextAlign) -> Unit,
+  modifier: Modifier = Modifier,
+  align: TextAlign = TextAlign.Start,
+  heading: String,
+  text: @Composable (modifier: Modifier, defaultStyle: TextStyle, textAlign: TextAlign) -> Unit,
 ) {
   Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
     Text(
-        modifier = Modifier.fillMaxWidth(),
-        text = heading,
-        style = MaterialTheme.typography.bodySmall,
-        textAlign = align,
+      modifier = Modifier.fillMaxWidth(),
+      text = heading,
+      style = MaterialTheme.typography.bodySmall,
+      textAlign = align,
     )
     text(Modifier.fillMaxWidth(), MaterialTheme.typography.bodyMedium, align)
   }
