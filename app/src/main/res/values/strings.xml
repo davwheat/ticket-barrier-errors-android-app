@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UK Ticket Barrier Errors</string>
+    <string name="app_name_launcher">Gateline Errors</string>
+    <string name="error_code_input_label">Gateline code</string>
+    <string name="error_code_input_char_count">%1$s/3</string>
+    <string name="enter_error_code_prompt">Enter a barrier error code above</string>
+    <string name="error_code_invalid_int">Invalid error code entered</string>
+    <string name="error_code_unknown">Code %1$s isn\'t in our database at the moment.</string>
+    <string name="seek_assistance">Seek assistance %1$s</string>
+    <string name="icon_info_description">Info</string>
+    <string name="glossary_note">For error codes greater than or equal to 100, the key below applies to text errors.</string>
+</resources>
