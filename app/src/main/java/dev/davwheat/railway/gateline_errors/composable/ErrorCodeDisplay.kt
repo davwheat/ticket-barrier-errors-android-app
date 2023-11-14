@@ -1,6 +1,10 @@
 package dev.davwheat.railway.gateline_errors.composable
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,42 +23,41 @@ import dev.davwheat.railway.gateline_errors.ui.theme.AppTheme
 
 @Composable
 fun ErrorCodeDisplay(
-    modifier: Modifier = Modifier,
-    errorCode: String,
+  modifier: Modifier = Modifier,
+  errorCode: String,
 ) {
-  Card(modifier = modifier) {
+  Card(modifier = modifier.animateContentSize()) {
     Column(modifier = Modifier.padding(16.dp)) {
-      AnimatedContent(targetState = errorCode, label = "ErrorCodeDisplay") {
+      AnimatedContent(
+        targetState = errorCode,
+        label = "ErrorCodeDisplay",
+        transitionSpec = { fadeIn() togetherWith fadeOut() },
+      ) {
         if (it == "") {
           Text(
-              stringResource(R.string.enter_error_code_prompt),
-              textAlign = TextAlign.Center,
-              modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.bodyLarge,
+            stringResource(R.string.enter_error_code_prompt),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.bodyLarge,
           )
         } else {
-          val num =
-              try {
-                errorCode.toInt()
-              } catch (e: NumberFormatException) {
-                null
-              }
+          val num = it.toIntOrNull()
 
           if (num == null) {
             Text(
-                stringResource(R.string.error_code_invalid_int),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodyLarge,
+              stringResource(R.string.error_code_invalid_int),
+              textAlign = TextAlign.Center,
+              modifier = Modifier.fillMaxWidth(),
+              style = MaterialTheme.typography.bodyLarge,
             )
           } else if (ErrorCodes.containsKey(num)) {
             ErrorCodeDetail(errorCode = ErrorCodes[num]!!)
           } else {
             Text(
-                stringResource(R.string.error_code_unknown, num),
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                style = MaterialTheme.typography.bodyLarge,
+              stringResource(R.string.error_code_unknown, num),
+              textAlign = TextAlign.Center,
+              modifier = Modifier.fillMaxWidth(),
+              style = MaterialTheme.typography.bodyLarge,
             )
           }
         }
