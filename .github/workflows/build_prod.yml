@@ -50,13 +50,20 @@ jobs:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Build AAB and APK with Gradle
-        run: ./gradlew --refresh-dependencies assembleRelease
+        run: ./gradlew --refresh-dependencies assembleRelease bundleRelease
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
-      - name: Upload APK artifact to workflow
+      - name: Upload AAB artifact to workflow
         uses: actions/upload-artifact@v3
         with:
           name: Release APK
           if-no-files-found: error
           path: ./app/build/outputs/apk/release/*.apk
+
+      - name: Upload APK artifact to workflow
+        uses: actions/upload-artifact@v3
+        with:
+          name: Release AAB
+          if-no-files-found: error
+          path: ./app/build/outputs/bundle/release/*.aab
