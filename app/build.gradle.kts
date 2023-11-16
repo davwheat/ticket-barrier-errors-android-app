@@ -12,7 +12,7 @@ plugins {
 
 val versionMajor = 2
 val versionMinor = 0
-val versionPatch = 1
+val versionPatch = 2
 
 fun getBuildNumber(): Int {
   val df = SimpleDateFormat("yyyyMMdd")
