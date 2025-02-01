@@ -54,17 +54,12 @@ fun MainUi(modifier: Modifier = Modifier, showAds: Boolean) {
         confirmValueChange = { false },
         skipHiddenState = true,
         skipPartiallyExpanded = true,
+        density = LocalDensity.current,
       ),
     )
 
-  Scaffold(
-    modifier = modifier.safeDrawingPadding(),
-  ) { innerPadding ->
-    Box(
-      modifier = Modifier
-        .consumeWindowInsets(innerPadding)
-        .fillMaxSize(),
-    ) {
+  Scaffold(modifier) { innerPadding ->
+    Box(modifier = Modifier.fillMaxSize()) {
       BottomSheetScaffold(
         sheetDragHandle = {},
         sheetSwipeEnabled = false,
@@ -84,6 +79,7 @@ fun MainUi(modifier: Modifier = Modifier, showAds: Boolean) {
         },
       ) {
         Box(modifier = Modifier
+          .padding(innerPadding)
           .padding(it)
           .fillMaxSize()
           .padding(bottom = 84.dp)) {

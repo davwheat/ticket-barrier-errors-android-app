@@ -39,7 +39,7 @@ fun ErrorCodeEntry(modifier: Modifier = Modifier, value: String, onInput: (Strin
       },
       keyboardOptions =
       KeyboardOptions(
-        autoCorrect = false,
+        autoCorrectEnabled = false,
         capitalization = KeyboardCapitalization.None,
         imeAction = ImeAction.Search,
         keyboardType = KeyboardType.Number,

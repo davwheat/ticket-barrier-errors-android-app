@@ -26,12 +26,12 @@ fun getBuildNumber(): Int {
 
 android {
   namespace = "dev.davwheat.railway.gateline_errors"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "dev.davwheat.railway.gateline_errors"
     minSdk = 24
-    targetSdk = 34
+    targetSdk = 35
     versionCode = getBuildNumber()
     versionName = "$versionMajor.$versionMinor.$versionPatch"
 
