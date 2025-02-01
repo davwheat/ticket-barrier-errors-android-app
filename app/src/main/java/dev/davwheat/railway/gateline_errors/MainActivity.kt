@@ -3,6 +3,7 @@ package dev.davwheat.railway.gateline_errors
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +28,8 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
 
     setContent {
+      enableEdgeToEdge()
+
       var showAds by rememberSaveable { mutableStateOf(false) }
 
       LaunchedEffect(true) {
