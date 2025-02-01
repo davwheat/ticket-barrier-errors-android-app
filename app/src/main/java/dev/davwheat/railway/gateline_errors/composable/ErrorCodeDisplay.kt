@@ -23,78 +23,75 @@ import dev.davwheat.railway.gateline_errors.data.ErrorCodes
 import dev.davwheat.railway.gateline_errors.ui.theme.AppTheme
 
 @Composable
-fun ErrorCodeDisplay(
-  modifier: Modifier = Modifier,
-  errorCode: String,
-) {
-  Card(modifier = modifier.animateContentSize()) {
-    Column(modifier = Modifier.padding(16.dp)) {
-      AnimatedContent(
-        targetState = errorCode,
-        label = "ErrorCodeDisplay",
-        transitionSpec = { fadeIn() togetherWith fadeOut() },
-      ) {
-        if (it.isBlank()) {
-          Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text(
-              stringResource(R.string.no_code_blurb_1),
-              textAlign = TextAlign.Center,
-              modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.bodyLarge,
-            )
-            Text(
-              stringResource(R.string.no_code_blurb_2),
-              textAlign = TextAlign.Center,
-              modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.bodyLarge,
-            )
-          }
-        } else {
-          val num = it.toIntOrNull()
+fun ErrorCodeDisplay(modifier: Modifier = Modifier, errorCode: String) {
+    Card(modifier = modifier.animateContentSize()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            AnimatedContent(
+                targetState = errorCode,
+                label = "ErrorCodeDisplay",
+                transitionSpec = { fadeIn() togetherWith fadeOut() },
+            ) {
+                if (it.isBlank()) {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Text(
+                            stringResource(R.string.no_code_blurb_1),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                        Text(
+                            stringResource(R.string.no_code_blurb_2),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                } else {
+                    val num = it.toIntOrNull()
 
-          if (num == null) {
-            Text(
-              stringResource(R.string.error_code_invalid_int),
-              textAlign = TextAlign.Center,
-              modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.bodyLarge,
-            )
-          } else if (ErrorCodes.containsKey(num)) {
-            ErrorCodeDetail(errorCode = ErrorCodes[num]!!)
-          } else {
-            Text(
-              stringResource(R.string.error_code_unknown, num),
-              textAlign = TextAlign.Center,
-              modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.bodyLarge,
-            )
-          }
+                    if (num == null) {
+                        Text(
+                            stringResource(R.string.error_code_invalid_int),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    } else if (ErrorCodes.containsKey(num)) {
+                        ErrorCodeDetail(errorCode = ErrorCodes[num]!!)
+                    } else {
+                        Text(
+                            stringResource(R.string.error_code_unknown, num),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth(),
+                            style = MaterialTheme.typography.bodyLarge,
+                        )
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @Preview
 @Composable
 fun ErrorCodeDisplayPreviewValid() {
-  AppTheme { ErrorCodeDisplay(errorCode = "01") }
+    AppTheme { ErrorCodeDisplay(errorCode = "01") }
 }
 
 @Preview
 @Composable
 fun ErrorCodeDisplayPreviewInvalid() {
-  AppTheme { ErrorCodeDisplay(errorCode = "abc") }
+    AppTheme { ErrorCodeDisplay(errorCode = "abc") }
 }
 
 @Preview
 @Composable
 fun ErrorCodeDisplayPreviewEmpty() {
-  AppTheme { ErrorCodeDisplay(errorCode = "") }
+    AppTheme { ErrorCodeDisplay(errorCode = "") }
 }
 
 @Preview
 @Composable
 fun ErrorCodeDisplayPreviewUnknown() {
-  AppTheme { ErrorCodeDisplay(errorCode = "999") }
+    AppTheme { ErrorCodeDisplay(errorCode = "999") }
 }

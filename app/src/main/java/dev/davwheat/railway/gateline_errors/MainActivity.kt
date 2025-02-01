@@ -17,83 +17,89 @@ import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
 import dev.davwheat.railway.gateline_errors.composable.MainUi
 import dev.davwheat.railway.gateline_errors.ui.theme.AppTheme
-import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
-  private lateinit var consentInformation: ConsentInformation
-  private var isMobileAdsInitializeCalled = AtomicBoolean(false)
+    private lateinit var consentInformation: ConsentInformation
+    private var isMobileAdsInitializeCalled = AtomicBoolean(false)
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    setContent {
-      enableEdgeToEdge()
+        setContent {
+            enableEdgeToEdge()
 
-      var showAds by rememberSaveable { mutableStateOf(false) }
+            var showAds by rememberSaveable { mutableStateOf(false) }
 
-      LaunchedEffect(true) {
-        obtainAdsConsent {
-          Timber.d("Ads consent obtained")
-          showAds = true
+            LaunchedEffect(true) {
+                obtainAdsConsent {
+                    Timber.d("Ads consent obtained")
+                    showAds = true
+                }
+            }
+
+            AppTheme { MainUi(modifier = Modifier, showAds = showAds) }
         }
-      }
-
-      AppTheme { MainUi(modifier = Modifier, showAds = showAds) }
     }
-  }
 
-  private fun obtainAdsConsent(callback: () -> Unit) {
-    val params = ConsentRequestParameters.Builder().setTagForUnderAgeOfConsent(false).build()
+    private fun obtainAdsConsent(callback: () -> Unit) {
+        val params = ConsentRequestParameters.Builder().setTagForUnderAgeOfConsent(false).build()
 
-    consentInformation = UserMessagingPlatform.getConsentInformation(this)
-    consentInformation.requestConsentInfoUpdate(
-      this,
-      params,
-      {
-        UserMessagingPlatform.loadAndShowConsentFormIfRequired(this@MainActivity) { loadAndShowError ->
-          // Consent gathering failed.
-          Timber.w(
-            String.format("%s: %s", loadAndShowError?.errorCode, loadAndShowError?.message)
-          )
+        consentInformation = UserMessagingPlatform.getConsentInformation(this)
+        consentInformation.requestConsentInfoUpdate(
+            this,
+            params,
+            {
+                UserMessagingPlatform.loadAndShowConsentFormIfRequired(this@MainActivity) {
+                    loadAndShowError ->
+                    // Consent gathering failed.
+                    Timber.w(
+                        String.format(
+                            "%s: %s",
+                            loadAndShowError?.errorCode,
+                            loadAndShowError?.message,
+                        )
+                    )
 
-          // Consent has been gathered.
-          initializeMobileAdsSdk(callback)
+                    // Consent has been gathered.
+                    initializeMobileAdsSdk(callback)
+                }
+            },
+            { requestConsentError ->
+                // Consent gathering failed.
+                Timber.w(
+                    String.format(
+                        "%s: %s",
+                        requestConsentError.errorCode,
+                        requestConsentError.message,
+                    )
+                )
+            },
+        )
+
+        if (consentInformation.canRequestAds()) {
+            initializeMobileAdsSdk(callback)
         }
-      },
-      { requestConsentError ->
-        // Consent gathering failed.
-        Timber.w(
-          String.format("%s: %s", requestConsentError.errorCode, requestConsentError.message)
-        )
-      })
-
-    if (consentInformation.canRequestAds()) {
-      initializeMobileAdsSdk(callback)
-    }
-  }
-
-  private fun initializeMobileAdsSdk(callback: () -> Unit) {
-    if (isMobileAdsInitializeCalled.getAndSet(true)) {
-      callback()
-      return
     }
 
-    // Initialize the Google Mobile Ads SDK.
-    MobileAds.initialize(this)
+    private fun initializeMobileAdsSdk(callback: () -> Unit) {
+        if (isMobileAdsInitializeCalled.getAndSet(true)) {
+            callback()
+            return
+        }
 
-    MobileAds.setRequestConfiguration(
-      RequestConfiguration.Builder()
-        .setTestDeviceIds(
-          if (BuildConfig.DEBUG)
-            listOf(
-              "077F865A83D45A5C09CB4C8C845ADCA1",
-            )
-          else null,
+        // Initialize the Google Mobile Ads SDK.
+        MobileAds.initialize(this)
+
+        MobileAds.setRequestConfiguration(
+            RequestConfiguration.Builder()
+                .setTestDeviceIds(
+                    if (BuildConfig.DEBUG) listOf("077F865A83D45A5C09CB4C8C845ADCA1") else null
+                )
+                .build()
         )
-        .build(),
-    )
 
-    callback()
-  }
+        callback()
+    }
 }

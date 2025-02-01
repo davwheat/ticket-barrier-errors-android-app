@@ -22,97 +22,91 @@ import dev.davwheat.railway.gateline_errors.ui.theme.AppTheme
 import dev.davwheat.railway.gateline_errors.ui.theme.LcdDisplayFont
 
 @Composable
-fun ErrorCodeDetail(
-  modifier: Modifier = Modifier,
-  errorCode: Rejection,
-) {
-  Column(
-    modifier,
-    verticalArrangement = Arrangement.spacedBy(8.dp),
-  ) {
-    Text(
-      stringResource(R.string.seek_assistance, errorCode.code),
-      modifier = Modifier.fillMaxWidth(),
-      fontFamily = LcdDisplayFont,
-      fontSize = 28.sp,
-      color = MaterialTheme.colorScheme.onSurfaceVariant,
-      textAlign = TextAlign.Center,
-    )
-
-    errorCode.textCode?.let { code ->
-      DataPair(
-        heading = "Text Error",
-        text = { _modifier, style, align ->
-          Text(
-            modifier = _modifier,
-            text = code,
-            style = style,
+fun ErrorCodeDetail(modifier: Modifier = Modifier, errorCode: Rejection) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            stringResource(R.string.seek_assistance, errorCode.code),
+            modifier = Modifier.fillMaxWidth(),
             fontFamily = LcdDisplayFont,
+            fontSize = 28.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontSize = 18.sp,
-            textAlign = align,
-          )
+            textAlign = TextAlign.Center,
+        )
+
+        errorCode.textCode?.let { code ->
+            DataPair(
+                heading = "Text Error",
+                text = { _modifier, style, align ->
+                    Text(
+                        modifier = _modifier,
+                        text = code,
+                        style = style,
+                        fontFamily = LcdDisplayFont,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontSize = 18.sp,
+                        textAlign = align,
+                    )
+                },
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                align = TextAlign.Center,
+            )
+        }
+
+        DataPair(heading = "Definition") { _modifier, style, align ->
+            Text(
+                modifier = _modifier,
+                text = errorCode.definition,
+                style = style,
+                textAlign = align,
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
+        DataPair(heading = "Explanation", text = errorCode.helpText)
+
+        errorCode.laymansReason?.let { DataPair(heading = "Possible reason(s)", text = it) }
+
+        DataPair(heading = "Action needed", text = errorCode.actionByStaff)
+    }
+}
+
+@Composable
+private fun DataPair(
+    modifier: Modifier = Modifier,
+    align: TextAlign = TextAlign.Start,
+    heading: String,
+    text: String,
+) {
+    DataPair(
+        modifier = modifier,
+        heading = heading,
+        text = { _modifier, style, _ ->
+            Text(modifier = _modifier, text = text, style = style, textAlign = align)
         },
-        modifier = Modifier.align(Alignment.CenterHorizontally),
-        align = TextAlign.Center,
-      )
-    }
-
-    DataPair(heading = "Definition") { _modifier, style, align ->
-      Text(
-        modifier = _modifier,
-        text = errorCode.definition,
-        style = style,
-        textAlign = align,
-        fontWeight = FontWeight.Bold,
-      )
-    }
-
-    DataPair(heading = "Explanation", text = errorCode.helpText)
-
-    errorCode.laymansReason?.let { DataPair(heading = "Possible reason(s)", text = it) }
-
-    DataPair(heading = "Action needed", text = errorCode.actionByStaff)
-  }
-}
-
-@Composable
-private fun DataPair(
-  modifier: Modifier = Modifier,
-  align: TextAlign = TextAlign.Start,
-  heading: String,
-  text: String,
-) {
-  DataPair(
-    modifier = modifier,
-    heading = heading,
-    text = { _modifier, style, _ ->
-      Text(modifier = _modifier, text = text, style = style, textAlign = align)
-    },
-    align = align,
-  )
-}
-
-@Composable
-private fun DataPair(
-  modifier: Modifier = Modifier,
-  align: TextAlign = TextAlign.Start,
-  heading: String,
-  text: @Composable (modifier: Modifier, defaultStyle: TextStyle, textAlign: TextAlign) -> Unit,
-) {
-  Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-    Text(
-      modifier = Modifier.fillMaxWidth(),
-      text = heading,
-      style = MaterialTheme.typography.bodySmall,
-      textAlign = align,
+        align = align,
     )
-    text(Modifier.fillMaxWidth(), MaterialTheme.typography.bodyMedium, align)
-  }
+}
+
+@Composable
+private fun DataPair(
+    modifier: Modifier = Modifier,
+    align: TextAlign = TextAlign.Start,
+    heading: String,
+    text: @Composable (modifier: Modifier, defaultStyle: TextStyle, textAlign: TextAlign) -> Unit,
+) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = heading,
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = align,
+        )
+        text(Modifier.fillMaxWidth(), MaterialTheme.typography.bodyMedium, align)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun ErrorCodeDetailPreview() {
-  AppTheme { ErrorCodeDetail(errorCode = ErrorCodes[1]!!) }
+    AppTheme { ErrorCodeDetail(errorCode = ErrorCodes[1]!!) }
 }
