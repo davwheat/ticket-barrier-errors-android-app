@@ -5,6 +5,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,13 +34,21 @@ fun ErrorCodeDisplay(
         label = "ErrorCodeDisplay",
         transitionSpec = { fadeIn() togetherWith fadeOut() },
       ) {
-        if (it == "") {
-          Text(
-            stringResource(R.string.enter_error_code_prompt),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.bodyLarge,
-          )
+        if (it.isBlank()) {
+          Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(
+              stringResource(R.string.no_code_blurb_1),
+              textAlign = TextAlign.Center,
+              modifier = Modifier.fillMaxWidth(),
+              style = MaterialTheme.typography.bodyLarge,
+            )
+            Text(
+              stringResource(R.string.no_code_blurb_2),
+              textAlign = TextAlign.Center,
+              modifier = Modifier.fillMaxWidth(),
+              style = MaterialTheme.typography.bodyLarge,
+            )
+          }
         } else {
           val num = it.toIntOrNull()
 

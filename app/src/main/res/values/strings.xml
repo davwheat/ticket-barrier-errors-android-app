@@ -3,10 +3,11 @@
     <string name="app_name_launcher">Gateline Errors</string>
     <string name="error_code_input_label">Gateline code</string>
     <string name="error_code_input_char_count">%1$s/3</string>
-    <string name="enter_error_code_prompt">Enter a barrier error code</string>
     <string name="error_code_invalid_int">Invalid error code entered</string>
     <string name="error_code_unknown">Code %1$s isn\'t in our database at the moment.</string>
     <string name="seek_assistance">Seek assistance %1$s</string>
     <string name="icon_info_description">Info</string>
     <string name="glossary_note">For error codes greater than or equal to 100, the key below applies to text errors.</string>
+    <string name="no_code_blurb_2">This code can be used to look up what caused a barrier not to open, and see if it\'s your fault or the barrier\'s.</string>
+    <string name="no_code_blurb_1">When most National Rail or TfL ticket barriers don\'t open, they\'ll show a \"Seek assistance\" message with a numerical error code.</string>
 </resources>
