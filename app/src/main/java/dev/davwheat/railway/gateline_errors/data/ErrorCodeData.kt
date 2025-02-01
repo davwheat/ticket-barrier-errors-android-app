@@ -339,7 +339,7 @@ val ErrorCodes =
       textCode = "PASSB OVER",
       definition = "Pass back",
       laymansReason =
-      "If you touch in and out a few times at a station within a short amount of time, the barriers won't let you through as they think you might be handing the ticket back to other people.\n\nUsing Interail? Unless the ticket barriers have been explicitly set up for this (which they've probably not been), you'll see this error when scanning your e-Ticket barcode. Show your ticket to a member of staff instead.",
+      "If you touch in and out a few times at a station within a short amount of time, the barriers won't let you through as they think you might be handing the ticket back to other people.\n\nUsing Interail? Unless the ticket barriers have been explicitly set up for this (which they've probably not been), you'll see this error when scanning your pass's barcode. Show your ticket to a member of staff instead.",
       helpText =
       "Oyster or smartcard just used in the same direction at the same station.",
     ),
@@ -912,8 +912,7 @@ val ErrorCodes =
       "122",
       textCode = "XX YY",
       definition = "London Underground ticket not valid here",
-      helpText =
-      "Your London Underground ticket cannot be used to travel on National Rail services.",
+      helpText = "Your London Underground ticket, or ticket with London Underground validity, cannot be used to travel on National Rail services at this location.",
       action = ActionByStaff.TO_TICKET_OFFICE,
     ),
     Rejection(
@@ -936,22 +935,22 @@ val ErrorCodes =
       "125",
       textCode = "XX DDDD",
       definition = "National Rail ticket cannot be used to exit here",
-      helpText = "The destination on your ticket doesn't match your current station.",
+      helpText = "This station isn't a permitted destination for your ticket. If you're breaking your journey, you might inadvertently see this error.",
       action = ActionByStaff.CHECK_VALIDITY_THEN_TO,
     ),
     Rejection(
       "126",
       textCode = "XX OOOO",
       definition = "National Rail ticket cannot be used to enter here",
-      helpText = "The origin on your ticket doesn't match your current station.",
+      helpText = "This station isn't a permitted origin for your ticket. If you're breaking your journey, you might inadvertently see this error.",
       action = ActionByStaff.CHECK_VALIDITY_THEN_TO,
     ),
     Rejection(
       "127",
       textCode = "XX DDMMYY",
       definition = "National Rail ticket not valid today",
-      helpText = "The date on your ticket doesn't match today's date.",
-      action = ActionByStaff.TO_TICKET_OFFICE,
+      helpText = "The validity period of your ticket doesn't include today's date. If a validity easement is in place due to industrial action or a 'Do Not Travel' warning, this won't be followed by ticket barriers.",
+      action = ActionByStaff.CHECK_VALIDITY_THEN_TO,
     ),
     Rejection(
       "128",
@@ -973,7 +972,7 @@ val ErrorCodes =
       textCode = "XX SSSS",
       definition = "Ticket valid at London Underground stations only",
       helpText =
-      "Your ticket can only be used at London Underground stations. (Meaning of SSSS is unknown.)",
+      "Your ticket can only be used at London Underground stations.",
       action = ActionByStaff.SEEK_ASSISTANCE,
     ),
     Rejection(
@@ -1005,14 +1004,15 @@ val ErrorCodes =
       laymansReason =
       "If you ticket still appears in-date, your cross-London transfer may have been used prior to this date or you've already " +
               "started your journey on a previous day, which confuses some barriers. Seek assistance from staff if this is the case.",
-      helpText = "Your ticket has apparently expired.",
+      helpText = "Your ticket has expired.",
       action = ActionByStaff.CHECK_VALIDITY_THEN_TO,
     ),
     Rejection(
       "135",
       textCode = "XX RR",
       definition = "National Rail ticket/smartcard special rules",
-      helpText = "Meaning unknown. Maybe rejecting certain ticket types?",
+      laymansReason = "Some train operators set their gatelines to reject all tickets of a certain type or with a particular discount. This is common to impose \"Railcard blocks\" for manual verification of your discount.",
+      helpText = "The gateline has been told to reject your ticket despite it likely being valid in order to perform a manual check.",
       action = ActionByStaff.SEEK_ASSISTANCE,
     ),
     Rejection(
