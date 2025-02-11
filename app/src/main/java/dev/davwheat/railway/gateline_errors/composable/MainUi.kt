@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -56,7 +57,7 @@ fun MainUi(modifier: Modifier = Modifier, showAds: Boolean) {
                 )
         )
 
-    Scaffold(modifier) { innerPadding ->
+    Scaffold(modifier.imePadding()) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize()) {
             BottomSheetScaffold(
                 sheetDragHandle = {},
